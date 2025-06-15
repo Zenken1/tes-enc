@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zenken Store</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #0a192f;
+            color: #e6f1ff;
+        }
+        header {
+            background-color: #112240;
+            color: #e6f1ff;
+            padding: 1rem;
+            text-align: center;
+            position: relative;
+            border-bottom: 1px solid #1e2a4a;
+        }
+        .admin-logo {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #64ffda;
+        }
+        .header-logo {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #64ffda;
+        }
+        .menu-container {
+            display: flex;
+            flex-direction: column;
+            padding: 15px;
+            background-color: #112240;
+            border-bottom: 1px solid #1e2a4a;
+        }
+        .menu-button {
+            background-color: #0077b6;
+            color: white;
+            border: none;
+            padding: 12px 15px 12px 45px;
+            text-align: left;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 5px 0;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: all 0.3s;
+            position: relative;
+        }
+        .menu-button:hover {
+            background-color: #0096c7;
+            transform: translateY(-2px);
+        }
+        .menu-icon {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 24px;
+            height: 24px;
+        }
+        .content-section {
+            display: none;
+            padding: 20px;
+            background-color: #112240;
+            margin: 15px;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 1px solid #1e2a4a;
+        }
+        .active {
+            display: block;
+        }
+        .product {
+            border-bottom: 1px solid #1e2a4a;
+            padding: 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .product-image {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 5px;
+            border: 1px solid #1e2a4a;
+        }
+        .product-info {
+            flex: 1;
+        }
+        .product:last-child {
+            border-bottom: none;
+        }
+        .whatsapp-button {
+            background-color: #0077b6;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 10px;
+            font-weight: bold;
+            width: 100%;
+            text-align: center;
+            box-sizing: border-box;
+            transition: all 0.3s;
+        }
+        .whatsapp-button:hover {
+            background-color: #0096c7;
+            transform: translateY(-2px);
+        }
+        .payment-method {
+            background-color: #112240;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #1e2a4a;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .payment-icon {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
+        .payment-method.dana {
+            border-left: 4px solid #008FE2;
+        }
+        .payment-method.gopay {
+            border-left: 4px solid #00AAEE;
+        }
+        .payment-method.qris {
+            border-left: 4px solid #FF6B00;
+        }
+        .payment-info {
+            flex: 1;
+        }
+        .copy-btn {
+            background-color: #0077b6;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .copy-btn:hover {
+            background-color: #0096c7;
+        }
+        footer {
+            background-color: #112240;
+            color: #e6f1ff;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            font-size: 14px;
+            border-top: 1px solid #1e2a4a;
+        }
+        footer p {
+            color: #0077b6;
+            font-weight: bold;
+            margin: 0;
+        }
+        .support-item {
+            padding: 10px;
+            border-bottom: 1px solid #1e2a4a;
+        }
+        .support-message {
+            background-color: #1e2a4a;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+            border-left: 4px solid #0077b6;
+            font-style: italic;
+        }
+        h1, h2, h3 {
+            color: #e6f1ff;
+        }
+        p {
+            color: #ccd6f6;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://l.top4top.io/p_3452s5sbu1.jpg" alt="Header Logo" class="header-logo">
+        <h1>Zenken Store</h1>
+        <img src="https://l.top4top.io/p_3452s5sbu1.jpg" alt="Admin Logo" class="admin-logo">
+    </header>
+
+    <div class="menu-container">
+        <button class="menu-button" onclick="showSection('all-produk')">
+            <img src="https://b.top4top.io/p_3453c0y301.jpg" alt="Menu Icon" class="menu-icon">
+            ALL PRODUK
+        </button>
+        <button class="menu-button" onclick="showSection('contact-admin')">
+            <img src="https://b.top4top.io/p_3453c0y301.jpg" alt="Menu Icon" class="menu-icon">
+            CONTACT ADMIN
+        </button>
+        <button class="menu-button" onclick="window.open('https://wa.me/6285177939657', '_blank')">
+            <img src="https://b.top4top.io/p_3453c0y301.jpg" alt="Menu Icon" class="menu-icon">
+            LINK WHATSAPP ADMIN
+        </button>
+        <button class="menu-button" onclick="window.open('https://instagram.com/ZenkenStore', '_blank')">
+            <img src="https://b.top4top.io/p_3453c0y301.jpg" alt="Menu Icon" class="menu-icon">
+            LINK IG ADMIN
+        </button>
+        <button class="menu-button" onclick="showSection('payment-admin')">
+            <img src="https://b.top4top.io/p_3453c0y301.jpg" alt="Menu Icon" class="menu-icon">
+            PAYMENT ADMIN
+        </button>
+        <button class="menu-button" onclick="showSection('support-me')">
+            <img src="https://b.top4top.io/p_3453c0y301.jpg" alt="Menu Icon" class="menu-icon">
+            SUPPORT ME
+        </button>
+    </div>
+
+    <div id="all-produk" class="content-section active">
+        <h2>ALL PRODUK</h2>
+        <div class="product">
+            <img src="https://a.top4top.io/p_3453bay9c1.jpg" alt="NOKOS INDO" class="product-image">
+            <div class="product-info">
+                <h3>NOKOS INDO</h3>
+                <p>Harga: 6.000</p>
+                <a href="https://wa.me/6285177939657?text=Woy%20Zen%20Ganteng%20Pacarnya%20Niken%2C%20Gua%20Tertarik%20Pada%20Produk%20Lu%20Gua%20Mau%20Buy%20NOKOS%20INDO" class="whatsapp-button">Pesan via WhatsApp</a>
+            </div>
+        </div>
+        <div class="product">
+            <img src="https://a.top4top.io/p_3453bay9c1.jpg" alt="NOKOS ALL NEGARA" class="product-image">
+            <div class="product-info">
+                <h3>NOKOS ALL NEGARA</h3>
+                <p>Harga: 6.000 sampai 20.000</p>
+                <a href="https://wa.me/6285177939657?text=Woy%20Zen%20Ganteng%20Pacarnya%20Niken%2C%20Gua%20Tertarik%20Pada%20Produk%20Lu%20Gua%20Mau%20Buy%20NOKOS%20ALL%20NEGARA" class="whatsapp-button">Pesan via WhatsApp</a>
+            </div>
+        </div>
+        <div class="product">
+            <img src="https://a.top4top.io/p_3453bay9c1.jpg" alt="RESELLER PANEL SPEK HARGA R32 C8" class="product-image">
+            <div class="product-info">
+                <h3>RESELLER PANEL SPEK HARGA R32 C8</h3>
+                <p>Harga: 9.000</p>
+                <a href="https://wa.me/6285177939657?text=Woy%20Zen%20Ganteng%20Pacarnya%20Niken%2C%20Gua%20Tertarik%20Pada%20Produk%20Lu%20Gua%20Mau%20Buy%20RESELLER%20PANEL%20SPEK%20HARGA%20R32%20C8" class="whatsapp-button">Pesan via WhatsApp</a>
+            </div>
+        </div>
+        <div class="product">
+            <img src="https://a.top4top.io/p_3453bay9c1.jpg" alt="RESELLER PANEL SPEK R16 C4" class="product-image">
+            <div class="product-info">
+                <h3>RESELLER PANEL SPEK R16 C4</h3>
+                <p>Harga: 9.000</p>
+                <a href="https://wa.me/6285177939657?text=Woy%20Zen%20Ganteng%20Pacarnya%20Niken%2C%20Gua%20Tertarik%20Pada%20Produk%20Lu%20Gua%20Mau%20Buy%20RESELLER%20PANEL%20SPEK%20R16%20C4" class="whatsapp-button">Pesan via WhatsApp</a>
+            </div>
+        </div>
+        <div class="product">
+            <img src="https://a.top4top.io/p_3453bay9c1.jpg" alt="ADMIN PANEL SPEK R16 C4" class="product-image">
+            <div class="product-info">
+                <h3>ADMIN PANEL SPEK R16 C4</h3>
+                <p>Harga: 14.000</p>
+                <a href="https://wa.me/6285177939657?text=Woy%20Zen%20Ganteng%20Pacarnya%20Niken%2C%20Gua%20Tertarik%20Pada%20Produk%20Lu%20Gua%20Mau%20Buy%20ADMIN%20PANEL%20SPEK%20R16%20C4" class="whatsapp-button">Pesan via WhatsApp</a>
+            </div>
+        </div>
+        <div class="product">
+            <img src="https://a.top4top.io/p_3453bay9c1.jpg" alt="JASHARE DI SHARE KE 190+ CH" class="product-image">
+            <div class="product-info">
+                <h3>JASHARE DI SHARE KE 190+ CH</h3>
+                <p>Harga: 2.000 PER TEXT</p>
+                <a href="https://wa.me/6285177939657?text=Woy%20Zen%20Ganteng%20Pacarnya%20Niken%2C%20Gua%20Tertarik%20Pada%20Produk%20Lu%20Gua%20Mau%20Buy%20JASHARE%20DI%20SHARE%20KE%20190%2B%20CH" class="whatsapp-button">Pesan via WhatsApp</a>
+            </div>
+        </div>
+        <div class="product">
+            <img src="https://a.top4top.io/p_3453bay9c1.jpg" alt="APK QRIS NO KTP" class="product-image">
+            <div class="product-info">
+                <h3>APK QRIS NO KTP</h3>
+                <p>Harga: 3.000</p>
+                <a href="https://wa.me/6285177939657?text=Woy%20Zen%20Ganteng%20Pacarnya%20Niken%2C%20Gua%20Tertarik%20Pada%20Produk%20Lu%20Gua%20Mau%20Buy%20APK%20QRIS%20NO%20KTP" class="whatsapp-button">Pesan via WhatsApp</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="contact-admin" class="content-section">
+        <h2>CONTACT ADMIN</h2>
+        <img src="https://l.top4top.io/p_3452s5sbu1.jpg" alt="Admin Logo" style="width:80px; height:80px; border-radius:50%; display:block; margin:10px auto;">
+        <p>Nomor WhatsApp: 6285177939657</p>
+        <a href="https://wa.me/6285177939657" class="whatsapp-button">Hubungi via WhatsApp</a>
+    </div>
+
+    <div id="payment-admin" class="content-section">
+        <h2>PAYMENT ADMIN</h2>
+        <img src="https://l.top4top.io/p_3452s5sbu1.jpg" alt="Admin Logo" style="width:80px; height:80px; border-radius:50%; display:block; margin:10px auto;">
+        
+        <div class="payment-method dana">
+            <img src="https://f.top4top.io/p_3453k3shc1.jpg" alt="DANA" class="payment-icon">
+            <div class="payment-info">
+                <h3>DANA</h3>
+                <p id="dana-number">085165407756</p>
+                <button class="copy-btn" onclick="copyToClipboard('dana-number')">Copy</button>
+            </div>
+        </div>
+        
+        <div class="payment-method gopay">
+            <img src="https://f.top4top.io/p_3453k3shc1.jpg" alt="GOPAY" class="payment-icon">
+            <div class="payment-info">
+                <h3>GOPAY</h3>
+                <p id="gopay-number">085165407756</p>
+                <button class="copy-btn" onclick="copyToClipboard('gopay-number')">Copy</button>
+            </div>
+        </div>
+        
+        <div class="payment-method qris">
+            <img src="https://h.top4top.io/p_3453dlu561.jpg" alt="QRIS" class="payment-icon">
+            <div class="payment-info">
+                <h3>QRIS</h3>
+                <p>MINTA ADMIN</p>
+                <a href="https://wa.me/6285177939657?text=woi%20kontol%2C%20gua%20minta%20QRIS%20nya%20untuk%20pembayaran%20nya" class="whatsapp-button">Minta QRIS via WhatsApp</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="support-me" class="content-section">
+        <h2>SUPPORT ME</h2>
+        <img src="https://l.top4top.io/p_3452s5sbu1.jpg" alt="Admin Logo" style="width:80px; height:80px; border-radius:50%; display:block; margin:10px auto;">
+        
+        <div class="support-item">@orang tua</div>
+        <div class="support-item">@doa ibu</div>
+        <div class="support-item">@allah swt</div>
+        <div class="support-item">@bangg dimzyy</div>
+        <div class="support-item">@bg dimzyy</div>
+        <div class="support-item">@dimzyy silet</div>
+
+        <div class="support-message">
+            <p><strong>Untuk @bang dimzyy @bg dimzyy @dimzyy silet:</strong></p>
+            <p>"Semangat terus Bang Dimzyy! Terus berkarya, jangan pernah ragu sama kemampuan sendiri. Banyak yang dukung dan bangga sama perjalanan Bang Dimzyy sampai sekarang. Apapun rintangannya, insyaAllah bisa dilalui. Tetap rendah hati, tetap jadi inspirasi. Gaskeun Bang!"</p>
+            <p>Dan trimakasih juga atas bimbingan nya, gua tanpa lu kaga bisa belajar dunia hosting walaupun baru bisa pemula hanya 1%</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>@Creator web store | By @ZenkenStore</p>
+    </footer>
+
+    <script>
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        function copyToClipboard(id) {
+            const text = document.getElementById(id).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Nomor berhasil disalin: ' + text);
+            }).catch(err => {
+                console.error('Gagal menyalin: ', err);
+            });
+        }
+    </script>
+</body>
+</html>
